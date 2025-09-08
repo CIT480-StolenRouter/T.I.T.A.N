@@ -20,6 +20,8 @@ def run():
         db_pass = ("projecttitan")
         db_host = ("100.111.190.113")
         db_port = 5433
+        # Access host machine at port 5433
+        # Host machine then forwards to its Database VM on port 5432
 
         print("\n")
 
