@@ -27,7 +27,7 @@ try {
 } catch (PDOException $e) {
     //If connection fails, return 500 and stop
     http_response_code(500);
-    exit("Database Connection FAILED: " . $e->getMessage())
+    exit("Database Connection FAILED: " . $e->getMessage());
 }
 
 //--------------------------------------------------------
@@ -63,7 +63,7 @@ if (
     $passw === '' || !$terms
     ) {
     http_response_code(422); //442 means "Unprocessable Entity" (bad input)
-    exit("Invalid input. Please check required fields.")
+    exit("Invalid input. Please check required fields.");
 }
 
 //--------------------------------------------------------
@@ -107,7 +107,7 @@ try {
     //Happens if emp_email is marked UNIQUE and a duplicate is inserted
     if ($e->getCode() === "23505") {
         http_response_code(409); //409 means conflict
-        exit("That email is already registered.")
+        exit("That email is already registered.");
     }
     // ELSE other error, bad conn, wrong col, etc. Generic failure
     http_response_code(500);
