@@ -27,7 +27,7 @@ try {
 } catch (PDOException $e) {
     //If connection fails, return 500 and stop
     http_response_code(500);
-    exit("Database Connection FAILED: " $e->getMessage())
+    exit("Database Connection FAILED: " . $e->getMessage())
 }
 
 //--------------------------------------------------------
