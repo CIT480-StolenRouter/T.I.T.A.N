@@ -4,7 +4,7 @@
 /* DATABASE CONNECTION SECTION 
    Hardcoded for testing, change this later*/
 
-$host = "10.0.2.15"; //postgreSQL VM private IP
+$host = "100.111.190.113"; //postgreSQL VM private IP
 $port = "5432"; //default postgre port
 $dbname = "mydb"; 
 $user = "postgres"; 
