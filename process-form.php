@@ -45,7 +45,7 @@ $last = trim($_POST['emp_lastname'] ?? '');
 $email = trim($_POST['emp_email'] ?? '');
 $phone = trim($_POST['emp_phonenum'] ?? '');
 $passw = $_POST['emp_passwordhash'] ?? ''; //no trim because passw can have spaces
-$terms = isset($_POST['terms']) true : false;
+$terms = isset($_POST['terms']) ? true : false;
 // isset() checks if the checkbox was submitted
 
 //--------------------------------------------------------
