@@ -5,7 +5,7 @@
    Hardcoded for testing, change this later*/
 
 $host = "10.0.2.15"; //postgreSQL VM private IP
-$port = "5432"; //default postgre port
+$port = "5433"; //default postgre port
 $dbname = "mydb"; 
 $user = "postgres"; 
 $pass = "projecttitan"; //user password
