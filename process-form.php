@@ -110,7 +110,7 @@ try {
         exit("That email is already registered.")
     }
     // ELSE other error, bad conn, wrong col, etc. Generic failure
-    http_response_code=(500);
+    http_response_code(500);
     exit("Insert failed: " . $e->getMessage());
 }
 
