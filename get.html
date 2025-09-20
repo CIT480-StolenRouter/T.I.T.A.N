@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Employees</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+  </head>
+<!-- php -S 127.0.0.1:8000 -->
+ <!-- php -S 0.0.0.0:8000 -->
+  <body>
+    <h1>Employee Information</h1>
+      <form action="infoget.php" method="get">
+
+        <label for="emp_id">Employee ID</label>
+        <input type="search" id="emp_id" name="emp_id">
+
+        <label for="emp_firstname">First Name</label>
+        <input type="search" id="emp_firstname" name="emp_firstname">
+
+        <label for="emp_lastname">Last Name</label>
+        <input type="search" id="emp_lastname" name="emp_lastname">
+
+        <label for="emp_email">Email</label>
+        <input type="search" id="emp_email" name="emp_email">
+
+        <label for="emp_phonenum">Phone Number</label>
+        <input type="search" id="emp_phonenum" name="emp_phonenum">
+
+        <input type="submit" value="Send Request" />
+        </form>
+
+  </body>
+</html>
