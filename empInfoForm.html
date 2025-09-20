@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Webpage</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+  </head>
+
+<!-- php -S 127.0.0.1:8000 -->
+ <!-- php -S 0.0.0.0:8000 -->
+  <body>
+    <h1>Employee Information Form</h1>
+      <form action="php/process-form.php" method="post">
+        <label for="emp_firstname">First Name</label>
+        <input type="text" id="emp_firstname" name="emp_firstname">
+
+        <label for="emp_lastname">Last Name</label>
+        <input type="text" id="emp_lastname" name="emp_lastname">
+
+        <label for="emp_email">Email</label>
+        <input type="text" id="emp_email" name="emp_email">
+
+        <label for="emp_phonenum">Phone Number</label>
+        <input type="text" id="emp_phonenum" name="emp_phonenum">
+
+        <label for="emp_passwordhash">Password</label>
+        <input type="password" id="emp_passwordhash" name="emp_passwordhash">
+
+        <label>
+          <input type="checkbox" name="terms">
+          I agree to the terms and conditions
+        </label>
+
+        <br>
+        <button type="submit">Send</button>
+      </form>
+      <div><a href="get.html">Go to Search</a></div>
+      <p><a href="../index.html">Back to Home</a></p>
+  </body>
+  </body>
+
+  

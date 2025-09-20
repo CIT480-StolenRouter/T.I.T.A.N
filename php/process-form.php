@@ -116,3 +116,19 @@ try {
 
 //Success with no exceptions thrown ifwe make it here
 echo "Thanks! Your info was saved.";
+
+// --- Build HTML result ---
+?>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Submission Complete</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+</head>
+<body>
+  <h1>Submission Accepted</h1>
+
+  <p><a href="../index.html">Back to Home</a></p>
+</body>
+</html>

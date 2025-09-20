@@ -11,25 +11,16 @@
  <!-- php -S 0.0.0.0:8000 -->
   <body>
     <h1>Employee Information</h1>
-      <form action="php/infoget.php" method="get">
 
-        <label for="emp_id">Employee ID</label>
-        <input type="search" id="emp_id" name="emp_id">
+      <form action="php/infoget.php" method="post">
+        <label for="emp_id">Search Employee ID</label>
+        <input type="text" id="emp_id" name="emp_id">
+        <button type="submit">Send</button>
+      </form>
 
-        <label for="emp_firstname">First Name</label>
-        <input type="search" id="emp_firstname" name="emp_firstname">
-
-        <label for="emp_lastname">Last Name</label>
-        <input type="search" id="emp_lastname" name="emp_lastname">
-
-        <label for="emp_email">Email</label>
-        <input type="search" id="emp_email" name="emp_email">
-
-        <label for="emp_phonenum">Phone Number</label>
-        <input type="search" id="emp_phonenum" name="emp_phonenum">
-
-        <input type="submit" value="Send Request" />
-        </form>
-
+      <br>
+      <br>
+      <br>
+      <p><a href="../index.html">Back to Home</a></p>
   </body>
 </html>
