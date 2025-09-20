@@ -68,5 +68,6 @@ $row = $stmt->fetch();
   <?php endif; ?>
 
   <p><a href="../get.html">Go to Search</a></p>
+  <p><a href="../index.html">Back to Home</a></p>
 </body>
 </html>
