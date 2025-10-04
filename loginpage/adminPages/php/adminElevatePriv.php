@@ -101,8 +101,8 @@ try {
 <body>
   <h1>Submission Accepted</h1>
 
-  <p><a href="../adminPages/adminList.html">List Administrators</a></p>
-  <p><a href="../adminPages/admin.html">Admin Home</a></p>
-  <p><a href="../index.html">Back to Home</a></p>
+  <p><a href="../adminList.html">List Administrators</a></p>
+  <p><a href="../admin.html">Admin Home</a></p>
+  <p><a href="../../../index.html">Back to Home</a></p>
 </body>
 </html>
