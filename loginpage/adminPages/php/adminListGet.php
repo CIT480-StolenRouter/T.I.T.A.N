@@ -77,7 +77,7 @@ $rows = $stmt->fetchAll();
       </tbody>
     </table>
   <?php endif; ?>
-  <p><a href="../adminPages/admin.html">Admin Home</a></p>
-  <p><a href="../index.html">Back to Home</a></p>
+  <p><a href="../admin.html">Admin Home</a></p>
+  <p><a href="../../../index.html">Back to Home</a></p>
 </body>
 </html>
