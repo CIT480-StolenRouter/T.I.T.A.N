@@ -38,41 +38,44 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $password === '') {
 try {
     //  Include role (and optionally an "is_active" check)
     $stmt = $pdo->prepare(
-        'SELECT id, email, password_hash, role
-           FROM app_user
-          WHERE email = :email
+        'SELECT emp_id, emp_email, emp_passwordhash, role
+           FROM empusers
+          WHERE emp_email = :email
           LIMIT 1'
         // Optionally add: AND is_active = true
     );
     $stmt->execute([':email' => $email]);
     $user = $stmt->fetch();
 
-    if ($user && password_verify($password, $user['password_hash'])) {
+    if ($user && password_verify($password, $user['emp_passwordhash'])) {
 
         // Opportunistic rehash
-        if (password_needs_rehash($user['password_hash'], PASSWORD_DEFAULT)) {
+        if (password_needs_rehash($user['emp_passwordhash'], PASSWORD_DEFAULT)) {
             $newHash = password_hash($password, PASSWORD_DEFAULT);
-            $upd = $pdo->prepare('UPDATE app_user SET password_hash = :h WHERE id = :id');
-            $upd->execute([':h' => $newHash, ':id' => $user['id']]);
+            $upd = $pdo->prepare('UPDATE empusers SET emp_passwordhash = :h WHERE emp_id = :id');
+            $upd->execute([':h' => $newHash, ':id' => $user['emp_id']]);
         }
 
         // Session setup
         session_regenerate_id(true);
-        $_SESSION['user_id'] = (int)$user['id'];
-        $_SESSION['email']   = $user['email'];
+        $_SESSION['emp_id'] = (int)$user['id'];
+        $_SESSION['emp_email']   = $user['email'];
         $_SESSION['role']    = $user['role']; // store role
 
         // Role-based redirect
         // Normalize role to be safe against case/whitespace differences
         $role = strtolower(trim((string)$user['role']));
         switch ($role) {
-            case 'Employee':
+            case ' ':
                 $dest = '../../../index.html';
                 break;
-            case 'Admin':
-                $dest = '../../adminPages/admin.php';
+            case 'employee':
+                $dest = '../../../index.html';
                 break;
-            case 'User':
+            case 'admin':
+                $dest = '../../adminPages/admin.html';
+                break;
+            case 'user':
             default:
                 $dest = '../userlogin.html';
                 break;
@@ -85,6 +88,8 @@ try {
         exit('Invalid email or password');
     }
 } catch (Throwable $e) {
+    error_log('Login error: ' . $e->getMessage());
     http_response_code(500);
     exit('Server error');
 }
+
