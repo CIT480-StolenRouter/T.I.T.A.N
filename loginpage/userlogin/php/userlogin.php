@@ -1,11 +1,11 @@
 <?php
-// ---- DB CONNECTION (same as yours; consider env vars in prod) ----
+// ---- DB CONNECTION ----
 $host = "100.111.190.113";
 $port = "5432";
 $dbname = "mydb";
 $user = "postgres";
 $pass = "projecttitan";
-$dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
+$dsn  = "pgsql:host=$host;port=$port;dbname=$dbname";
 
 try {
     $pdo = new PDO($dsn, $user, $pass, [
@@ -14,6 +14,7 @@ try {
         PDO::ATTR_EMULATE_PREPARES   => false,
     ]);
 } catch (PDOException $e) {
+    error_log('DB connect error: ' . $e->getMessage());
     http_response_code(500);
     exit("Database Connection FAILED.");
 }
@@ -52,13 +53,13 @@ try {
         // Opportunistic rehash
         if (password_needs_rehash($user['emp_passwordhash'], PASSWORD_DEFAULT)) {
             $newHash = password_hash($password, PASSWORD_DEFAULT);
-            $upd = $pdo->prepare('UPDATE empusers SET emp_passwordhash = :h WHERE emp_id = :id');
-            $upd->execute([':h' => $newHash, ':id' => $user['emp_id']]);
+            $upd = $pdo->prepare('UPDATE empusers SET emp_passwordhash = :h WHERE emp_id = :emp_id');
+            $upd->execute([':h' => $newHash, ':emp_id' => $user['emp_id']]);
         }
 
         // Session setup
         session_regenerate_id(true);
-        $_SESSION['emp_id'] = (int)$user['id'];
+        $_SESSION['emp_id'] = (int)$user['emp_id'];
         $_SESSION['emp_email']   = $user['email'];
         $_SESSION['role']    = $user['role']; // store role
 
