@@ -30,7 +30,7 @@ try {
 }
 
 // --- Run query ---
-$sql = "SELECT emp_id, emp_firstname, emp_lastname, emp_email, emp_phonenum
+$sql = "SELECT emp_id, emp_firstname, emp_lastname, emp_email, emp_phonenum, role
         FROM empusers
         ";
 
@@ -61,6 +61,7 @@ $rows = $stmt->fetchAll();
           <th>Last</th>
           <th>Email</th>
           <th>Phone</th>
+          <th>Role</th>
         </tr>
       </thead>
       <tbody>
@@ -71,6 +72,7 @@ $rows = $stmt->fetchAll();
             <td><?= htmlspecialchars($row['emp_lastname']) ?></td>
             <td><?= htmlspecialchars($row['emp_email']) ?></td>
             <td><?= htmlspecialchars($row['emp_phonenum']) ?></td>
+            <td><?= htmlspecialchars($row['role']) ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>

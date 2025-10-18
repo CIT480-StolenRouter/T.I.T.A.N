@@ -30,7 +30,7 @@ try {
 }
 
 // --- Run query ---
-$sql = "SELECT a.admin_id, u.emp_id, u.emp_firstname, u.emp_lastname, a.role
+$sql = "SELECT a.admin_id, u.emp_id, u.emp_firstname, u.emp_lastname, u.role
         FROM admin a
         JOIN empusers u ON a.emp_id = u.emp_id;
         ";

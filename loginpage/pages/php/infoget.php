@@ -22,7 +22,7 @@ if ($empid === '') {
 }
 
 // --- Run query ---
-$sql = "SELECT emp_id, emp_firstname, emp_lastname, emp_email, emp_phonenum
+$sql = "SELECT emp_id, emp_firstname, emp_lastname, emp_email, emp_phonenum, role
         FROM empusers
         WHERE emp_id = :emp_id";
 
@@ -53,6 +53,7 @@ $row = $stmt->fetch();
           <th>Last</th>
           <th>Email</th>
           <th>Phone</th>
+          <th>Role</th>
         </tr>
       </thead>
       <tbody>
@@ -62,6 +63,7 @@ $row = $stmt->fetch();
           <td><?= htmlspecialchars($row['emp_lastname']) ?></td>
           <td><?= htmlspecialchars($row['emp_email']) ?></td>
           <td><?= htmlspecialchars($row['emp_phonenum']) ?></td>
+          <td><?= htmlspecialchars($row['role']) ?></td>
         </tr>
       </tbody>
     </table>
