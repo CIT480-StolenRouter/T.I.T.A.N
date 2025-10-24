@@ -1,0 +1,78 @@
+:root{
+  --dark-purple:#2E2B6E;
+  --purple:#262345;
+  --light-purple:#A89BB2;
+  --blue:#A5ACB6;
+  --dark-blue:#596877;
+  --darker-blue:#304152;
+  --whiteII:#F3E8E9;
+  --greyish-white:#9CA2A8;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+
+body.logout{
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(180deg,var(--purple),var(--darker-blue));
+  color:var(--whiteII);
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+}
+
+.logout-card{
+  width:min(480px,90vw);
+  border-radius:16px;
+  padding:2rem;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 16px 40px rgba(0,0,0,.35);
+  text-align:center;
+}
+
+.logout-card h1{
+  margin:0 0 .25rem 0;
+}
+
+.logout-muted{
+  color:var(--blue);
+  margin-bottom:1.5rem;
+}
+
+.logout-actions{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+
+/* Buttons */
+.btn-primary{
+  background:var(--light-purple);
+  color:var(--purple);
+  border:none;
+  border-radius:999px;
+  font-weight:700;
+  padding:.9rem 1.1rem;
+  cursor:pointer;
+  transition:transform .12s ease, box-shadow .15s ease;
+  box-shadow:0 6px 18px rgba(168,155,178,.35);
+  text-decoration:none;
+}
+.btn-primary:hover{ transform:translateY(-1px); }
+
+.btn-ghost{
+  background:transparent;
+  border:1px solid rgba(165,172,182,.35);
+  color:var(--whiteII);
+  border-radius:999px;
+  padding:.9rem 1.1rem;
+  cursor:pointer;
+  text-decoration:none;
+}
+.btn-ghost:hover{ transform:translateY(-1px); }
+
+@media(max-width:420px){
+  .logout-card{padding:1.5rem;}
+}

@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <!-- keep this path if signin.css is in /loginpage relative to THIS file -->
+  <link rel="stylesheet" href="login.css">
+</head>
 
-  <body>
+<body class="auth">
+  <section class="auth-card">
     <h1>User Login</h1>
+    <p class="auth-muted">Log in to continue</p>
 
-    <form action="php/userlogin.php" method="POST" autocomplete="off">
-    <label>
-      Email
-      <input type="email" name="email" required />
-    </label>
+    <form action="php/userlogin.php" method="POST" autocomplete="off" class="auth-form">
+      <label for="email">Email</label>
+      <input class="form-control" id="email" type="email" name="email" required />
 
-    <br />
+      <label for="password">Password</label>
+      <input class="form-control" id="password" type="password" name="password" required />
 
-    <label>
-      Password
-      <input type="password" name="password" required />
-    </label>
+      <div class="auth-actions">
+        <a class="link" href="../../index.html">Home Page</a>
+        <button class="btn-primary" type="submit">Sign in</button>
+        <a href="signup.html">Create account</a>
+      </div>
+    </form>
 
-    <br />
-
-    <button type="submit">Sign in</button>
-    
-  </form>
-      <div><a href="../../index.html">Home Page</a></div>
-      <div><a href="../adminPages/admin.html">Admin Page</a></div>
-
-  </body>
-
-  </html>
+    <p class="auth-muted" style="margin-top:.75rem">
+      <a class="link" href="../adminPages/admin.html">Admin Page</a>
+    </p>
+  </section>
+</body>
+</html>

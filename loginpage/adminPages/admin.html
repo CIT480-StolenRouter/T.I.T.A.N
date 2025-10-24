@@ -3,21 +3,33 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Webpage</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
   </head>
 
   <body>
-    <div>
-        <h1>Admin Page</h1>
-    </div>
-    <div>
-        <p><a href="elevateUsertoEmp.html">Elevate User to Employee</a></p>
-        <p><a href="elevatePriv.html">Elevate Employee Privileges</a></p>
-        <p><a href="adminList.html">List Admins</a></p>
-        <p><a href="../../index.html">Back to Home</a></p>
-    </div>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">Admin Panel</div>
+        <nav class="nav">
+          <a href="elevateUsertoEmp.html">Elevate User to Employee</a>
+          <a href="elevatePriv.html">Elevate Employee Privileges</a>
+          <a href="adminList.html">List Admins</a>
+          <a href="../../index.html">Back to Home</a>
+        </nav>
+      </aside>
 
+      <!-- Main Content -->
+      <main class="main">
+        <header class="topbar">
+          <h1>Welcome, Admin</h1>
+        </header>
+
+        <section class="content">
+          <p>Select an option from the sidebar to manage users, privileges, or view the admin list.</p>
+        </section>
+      </main>
+    </div>
   </body>
-
 </html>
