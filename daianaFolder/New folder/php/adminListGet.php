@@ -30,7 +30,7 @@ try {
 }
 
 // --- Run query ---
-$sql = "SELECT a.admin_id, u.emp_id, u.emp_firstname, u.emp_lastname, u.role
+$sql = "SELECT a.admin_id, u.emp_id, u.emp_firstname, u.emp_lastname, a.admin_role
         FROM admin a
         JOIN empusers u ON a.emp_id = u.emp_id;
         ";
@@ -71,7 +71,7 @@ $rows = $stmt->fetchAll();
             <td><?= htmlspecialchars($row['emp_id']) ?></td>
             <td><?= htmlspecialchars($row['emp_firstname']) ?></td>
             <td><?= htmlspecialchars($row['emp_lastname']) ?></td>
-            <td><?= htmlspecialchars($row['role']) ?></td>
+            <td><?= htmlspecialchars($row['admin_role']) ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>

@@ -1,11 +1,9 @@
 <?php
 session_start();
-  echo $_SESSION["emp_email"] . "<br>";
-  echo $_SESSION["role"] . "<br>";
-require '../config/db.php';
+echo $_SESSION["emp_email"] . "<br>";
+echo $_SESSION["role"] . "<br>";
+require_once __DIR__ . '/../config/db.php';
 if(isset($_GET["listemps"])) {
-/* DATABASE CONNECTION SECTION 
-   Hardcoded for testing, change this later*/
 
 
 // --- Run query ---
@@ -19,7 +17,7 @@ $rows = $stmt->fetchAll();
 }
 
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -58,9 +56,6 @@ $rows = $stmt->fetchAll();
     </table>
   <?php endif; ?>
   <div><a href="../index.php">Home</a></div>
+  <div><a href="../admin.php">Admin</a></div>
 </body>
 </html>
-
-<?php
-
-?>

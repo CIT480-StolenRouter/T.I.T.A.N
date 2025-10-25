@@ -61,16 +61,16 @@ if (
 //SQL with named placeholders (:first, :last, :hash, :phone)
 //Placeholders prevent SQL injection
 
-$sql = "INSERT INTO admin (emp_id, role) 
-        VALUES (:emp_id, :role)
+$sql = "INSERT INTO admin (emp_id, admin_role) 
+        VALUES (:emp_id, :admin_role)
         ON CONFLICT (emp_id) DO UPDATE
-        SET role = EXCLUDED.role";       
+        SET admin_role = EXCLUDED.admin_role";       
 
 try {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
         ':emp_id' => $empid,
-        ':role'   => $role,
+        ':admin_role'   => $role,
     ]);
 } catch (PDOException $e) {
     // 23505 = unique_violation (e.g., if you have UNIQUE(emp_id) on admin)
@@ -106,16 +106,7 @@ try {
         <h1>Admin Page</h1>
 </div>
 
-    <div>
-    <form action="php/rolechange.php" method="post">
-    <label for="emp_id">User ID</label>
-    <input type="text" id="emp_id" name="emp_id">
-
-    <br>
-    <button type="submit">Confirm</button>
-    </form>
-
-    </div>
+    <h2>Update Complete</h2>
     <p><a href="../admin.php">Admin Home</a></p>
     <p><a href="../index.php">Back to Home</a></p>
   </body>
