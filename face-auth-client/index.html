@@ -1,18 +1,21 @@
-<!doctype html>
-<html>
-<head>
-  <head>
-  <meta charset="utf-8" />
-  <title>Security Facial Authentication</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-</head>
 <body>
-  <h1>Security Facial Authentication</h1>
-  <video id="video" width="320" height="240" autoplay muted></video>
-  <button id="captureBtn">Capture & Verify</button>
+  <h1>Face Login (Multi-User)</h1>
+
+  <div class="card">
+    <label for="userId">User ID</label>
+    <input id="userId" type="text" placeholder="e.g., eli123" />
+
+    <video id="video" width="320" height="240" autoplay muted></video>
+
+    <div class="actions">
+      <button id="enrollBtn">Enroll This Face</button>
+      <button id="verifyBtn">Verify This Face</button>
+      <button id="listBtn">List Users</button>
+    </div>
+
+    <pre id="status">Status: Initializing…</pre>
+  </div>
+
   <script defer src="https://unpkg.com/face-api.js@0.22.2/dist/face-api.min.js"></script>
   <script defer src="./client.js"></script>
 </body>
-</html>

@@ -1,5 +1,18 @@
 const video = document.getElementById('video');
-const captureBtn = document.getElementById('captureBtn');
+const enrollBtn = document.getElementById('enrollBtn');
+const verifyBtn = document.getElementById('verifyBtn');
+const listBtn = document.getElementById('listBtn');
+const statusEl = document.getElementById('status');
+const userIdEl = document.getElementById('userId');
+
+const SERVER = 'http://localhost:3000'; // change later if deploying
+const MATCH_THRESHOLD = 0.6; // should match server default
+
+function logStatus(objOrMsg) {
+  const msg = typeof objOrMsg === 'string' ? objOrMsg : JSON.stringify(objOrMsg, null, 2);
+  statusEl.textContent = `Status: ${msg}`;
+  console.log(objOrMsg);
+}
 
 async function loadModels() {
   const MODEL_URL = 'https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights';
@@ -11,51 +24,78 @@ async function loadModels() {
 async function startCamera() {
   const stream = await navigator.mediaDevices.getUserMedia({ video: true });
   video.srcObject = stream;
-  return new Promise(res => video.onloadedmetadata = res);
+  return new Promise(res => (video.onloadedmetadata = res));
 }
 
-captureBtn.addEventListener('click', async () => {
-  const raw = prompt('Paste NFC JSON (or cancel for demo)');
-  let nfcData;
-  if (!raw) {
-    const demoEmbedding = new Array(128).fill(0).map((_,i)=>Math.sin(i*0.1)*0.01);
-    nfcData = { userId: 'demo', embedding_b64: btoa(JSON.stringify(demoEmbedding)) };
-  } else {
-    nfcData = JSON.parse(raw);
-  }
-
+async function getDescriptor() {
   const canvas = document.createElement('canvas');
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
   canvas.getContext('2d').drawImage(video, 0, 0);
 
-  const detection = await faceapi.detectSingleFace(canvas, new faceapi.TinyFaceDetectorOptions())
+  const det = await faceapi
+    .detectSingleFace(canvas, new faceapi.TinyFaceDetectorOptions())
     .withFaceLandmarks()
     .withFaceDescriptor();
 
-  if (!detection) {
-    alert('No face detected!');
-    return;
-  }
+  return det ? Array.from(det.descriptor) : null;
+}
 
-  const descriptor = Array.from(detection.descriptor);
+async function enroll() {
+  const userId = (userIdEl.value || '').trim();
+  if (!userId) return logStatus('Enter a User ID before enrolling.');
+  logStatus('Capturing for enrollment…');
+  const desc = await getDescriptor();
+  if (!desc) return logStatus('No face detected. Try again with good lighting.');
 
-  const resp = await fetch('http://localhost:3000/verify', {
+  const embedding_b64 = btoa(JSON.stringify(desc));
+  const resp = await fetch(`${SERVER}/enroll`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      userId: nfcData.userId,
-      cardEmbedding_b64: nfcData.embedding_b64,
-      probeEmbedding: descriptor
-    })
+    body: JSON.stringify({ userId, embedding_b64 })
   });
+  const data = await resp.json();
+  if (!resp.ok) return logStatus(data);
+  logStatus({ message: 'Enrollment saved', userId, templates: data.templateCount });
+}
 
-  const result = await resp.json();
-  if (result.match) alert('✅ ACCESS GRANTED');
-  else alert('❌ ACCESS DENIED (score: ' + result.score + ')');
-});
+async function verify() {
+  const userId = (userIdEl.value || '').trim();
+  if (!userId) return logStatus('Enter a User ID to verify against.');
+  logStatus('Capturing for verification…');
+  const probe = await getDescriptor();
+  if (!probe) return logStatus('No face detected for verification.');
+
+  const resp = await fetch(`${SERVER}/verify`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userId, probeEmbedding: probe })
+  });
+  const data = await resp.json();
+  if (!resp.ok) return logStatus(data);
+  if (data.match) {
+    logStatus({ ok: true, message: '✅ MATCH', bestDistance: data.bestDistance, threshold: data.threshold, userId });
+  } else {
+    logStatus({ ok: false, message: '❌ NO MATCH', bestDistance: data.bestDistance, threshold: data.threshold, userId });
+  }
+}
+
+async function listUsers() {
+  const resp = await fetch(`${SERVER}/users`);
+  const data = await resp.json();
+  logStatus(data);
+}
+
+enrollBtn.addEventListener('click', enroll);
+verifyBtn.addEventListener('click', verify);
+listBtn.addEventListener('click', listUsers);
 
 (async () => {
-  await loadModels();
-  await startCamera();
+  try {
+    await loadModels();
+    await startCamera();
+    logStatus('Camera ready. Enter a User ID, then Enroll or Verify.');
+  } catch (e) {
+    logStatus('Init error: ' + e.message);
+  }
 })();
