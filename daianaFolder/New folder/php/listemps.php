@@ -2,7 +2,7 @@
 session_start();
   echo $_SESSION["emp_email"] . "<br>";
   echo $_SESSION["role"] . "<br>";
-include '../config/db.php';
+require '../config/db.php';
 if(isset($_GET["listemps"])) {
 /* DATABASE CONNECTION SECTION 
    Hardcoded for testing, change this later*/
