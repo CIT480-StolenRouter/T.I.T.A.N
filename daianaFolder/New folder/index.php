@@ -2,12 +2,14 @@
 declare(strict_types=1);
 session_start();
 $error = null;
-
+// ---------------------------------------------------
+// LOGOUT
 if(isset($_POST["logout"])) {
   session_destroy();
   header("Location: index.php");
 }
-
+// ---------------------------------------------------
+    // Checking login validity
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && 
     isset($_POST['login'])) {
 
@@ -25,16 +27,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
         require_once __DIR__ . '/config/errorcode.php';
         exit;
     }
-
+// ---------------------------------------------------
     // DB connection
     require_once __DIR__ . '/config/db.php'; // always define $pdo
-
+// ---------------------------------------------------
     // Ensure PDO throws exceptions (in case db.php didnt)
     if ($pdo instanceof PDO) {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
-
+// ---------------------------------------------------
+    // SQL STATEMENT
     try {
         // Fetch user by email column
         $stmt = $pdo->prepare(
@@ -45,10 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
         );
         $stmt->execute([':email' => $email]);
         $user = $stmt->fetch();
-
+// ---------------------------------------------------
         if ($user && password_verify($password, $user['emp_passwordhash'])) {
 
-            // Opportunistic rehash
+            // Opportunistic rehash?
             if (password_needs_rehash($user['emp_passwordhash'], PASSWORD_DEFAULT)) {
                 $newHash = password_hash($password, PASSWORD_DEFAULT);
                 $upd = $pdo->prepare(
@@ -56,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
                 );
                 $upd->execute([':h' => $newHash, ':emp_id' => (int)$user['emp_id']]);
             }
-
+// ---------------------------------------------------
             // Session Variables
             session_regenerate_id(true);
             $_SESSION['emp_id']    = (int)$user['emp_id'];
@@ -70,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
                     $dest = 'admin.php';
                     break;
                 case 'employee':
-                    $dest = 'home.php';
+                    $dest = 'employee.php';
                     break;
                 case 'user':
                 default:
@@ -81,7 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
             header('Location: ' . $dest);
             exit;
         }
-
+// ---------------------------------------------------
+        // ERROR CODES
         http_response_code(401);
         exit('Invalid email or password');
 
@@ -91,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
         exit('Server error');
     }
 }
-
+// ---------------------------------------------------
 ?> <!-- END OF PHP -->
 <!DOCTYPE html> <!-- START OF HTML -->
 <html lang = "eng"> 
