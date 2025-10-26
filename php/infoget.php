@@ -1,18 +1,9 @@
 <?php
 // --- Database connection ---
-$dsn  = "pgsql:host=100.111.190.113;port=5432;dbname=mydb";
-$user = "postgres";
-$pass = "projecttitan";
-
-try {
-    $pdo = new PDO($dsn, $user, $pass, [
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]);
-} catch (PDOException $e) {
-    http_response_code(500);
-    exit("<h1>Database Connection FAILED</h1><p>" . htmlspecialchars($e->getMessage()) . "</p>");
-}
+session_start();
+echo $_SESSION["emp_email"] . "<br>";
+echo $_SESSION["role"] . "<br>";
+require_once __DIR__ . '/../config/db.php';
 
 // --- Read emp_id from POST ---
 $empid = trim($_POST['emp_id'] ?? '');
@@ -70,6 +61,7 @@ $row = $stmt->fetch();
   <?php endif; ?>
 
   <p><a href="../get.html">Go to Search</a></p>
-  <p><a href="../../../index.html">Back to Home</a></p>
+  <p><a href="../admin.php">Admin</a></p>
+  <p><a href="../index.php">Back to Home</a></p>
 </body>
 </html>

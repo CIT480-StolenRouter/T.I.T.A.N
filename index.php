@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
             </div>
             <div class="actions">
                <button class="btn btn-primary"><a href="userpages/userlogin.php">Login</a></button> <!-- LOGIN BUTTON HERE <button class="btn btn-primary" onclick="scrollToId('login')">Login</button>-->
-               <button class="btn btn-ghost" onclick="scrollToId('login')">Sign Up</button>
+               <button class="btn btn-ghost"><a href="userpages/empinfoForm.html">Sign Up</a></button>
             </div>
     </div>
     </header>

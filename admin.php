@@ -29,6 +29,7 @@ if(isset($_POST["logout"])) {
           <a href="elevatePriv.html">Elevate Employee Privileges</a><br>
           <a href="adminList.html">List Admins</a><br>
           <a href="empList.html">List Employees</a><br>
+          <a href="get.html">Search One Employee</a><br>
           <a href="index.php">Back to Home</a><br>
         </nav>
       </aside>
