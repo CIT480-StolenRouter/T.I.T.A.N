@@ -108,7 +108,7 @@ $row = $stmt->fetch();
   <?php endif; ?>
   
   <p><a href="../admin.php">Back to Admin Home</a></p>
-  <p><a href="../elevateUsertoEmp.html">Back</a></p>
+  <p><a href="../html/elevateUsertoEmp.html">Back</a></p>
   <p><a href="../index.php">Back to Home</a></p>
 </body>
 </html>

@@ -60,7 +60,7 @@ $row = $stmt->fetch();
     </table>
   <?php endif; ?>
 
-  <p><a href="../get.html">Go to Search</a></p>
+  <p><a href="../html/get.html">Go to Search</a></p>
   <p><a href="../admin.php">Admin</a></p>
   <p><a href="../index.php">Back to Home</a></p>
 </body>

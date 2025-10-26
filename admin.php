@@ -25,12 +25,12 @@ if(isset($_POST["logout"])) {
       <aside class="sidebar">
         <div class="brand">Admin Panel</div><br>
         <nav class="nav">
-          <a href="elevateUsertoEmp.html">Change User Role</a><br>
-          <a href="elevatePriv.html">Elevate Employee Privileges</a><br>
-          <a href="adminList.html">List Admins</a><br>
-          <a href="empList.html">List Employees</a><br>
-          <a href="get.html">Search One Employee</a><br>
-          <a href="index.php">Back to Home</a><br>
+          <a href="html/elevateUsertoEmp.html">Change User Role</a><br>
+          <a href="html/elevatePriv.html">Elevate Employee Privileges</a><br>
+          <a href="html/adminList.html">List Admins</a><br>
+          <a href="html/empList.html">List Employees</a><br>
+          <a href="html/get.html">Search One Employee</a><br>
+          <a href="html/index.php">Back to Home</a><br>
         </nav>
       </aside>
 

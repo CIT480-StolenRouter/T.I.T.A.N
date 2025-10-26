@@ -109,7 +109,7 @@ echo "Thanks! Your info was saved.";
 <body>
   <h1>Submission Accepted</h1>
 
-  <p><a href="../empInfoForm.html">Submit Another</a></p>
+  <p><a href="../html/empInfoForm.html">Submit Another</a></p>
   <p><a href="../admin.php">Admin</a></p>
   <p><a href="../index.php">Back to Home</a></p>
 </body>
